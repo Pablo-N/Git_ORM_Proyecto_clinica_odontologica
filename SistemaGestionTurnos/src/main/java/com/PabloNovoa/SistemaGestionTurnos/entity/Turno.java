@@ -12,10 +12,10 @@ public class Turno {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_odontologo")
+    @JoinColumn(name = "odontologo_id", referencedColumnName = "id")
     private Odontologo odontologo;
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "paciente_id",referencedColumnName = "id")
     private Paciente paciente;
     @Column
     private LocalDate fecha;
@@ -25,18 +25,7 @@ public class Turno {
     public Turno() {
     }
 
-    public Turno(Odontologo odontologo, Paciente paciente, LocalDate fecha) {
-        this.odontologo = odontologo;
-        this.paciente = paciente;
-        this.fecha = fecha;
-    }
 
-    public Turno(Long id, Odontologo odontologo, Paciente paciente, LocalDate fecha) {
-        this.id = id;
-        this.odontologo = odontologo;
-        this.paciente = paciente;
-        this.fecha = fecha;
-    }
 
     // getters y setters
 

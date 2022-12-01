@@ -1,6 +1,7 @@
 package com.PabloNovoa.SistemaGestionTurnos.controller;
 
 import com.PabloNovoa.SistemaGestionTurnos.entity.Paciente;
+import com.PabloNovoa.SistemaGestionTurnos.exceptions.ResourceNotFoundException;
 import com.PabloNovoa.SistemaGestionTurnos.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -92,7 +93,7 @@ public class PacienteController {
     //delete
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarPaciente(@PathVariable Long id){
+    public ResponseEntity<String> eliminarPaciente(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<Paciente> pacienteBuscado=pacienteService.buscarPaciente(id);
         if (pacienteBuscado.isPresent()){
             //existe el id con un paciente registrado
@@ -102,9 +103,12 @@ public class PacienteController {
         }
         else{
             //no existe
+            //arrojar una excepción
+            throw new ResourceNotFoundException(
+                    "Error. No existe el ID= "+id+
+                    " asociado a un paciente en la base de datos.");
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No existe" +
-                    " el ID= "+id+" asociado a un paciente en la base de datos.");
+
         }
     }
 

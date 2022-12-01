@@ -1,7 +1,11 @@
 package com.PabloNovoa.SistemaGestionTurnos.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "odontologos")
@@ -19,6 +23,11 @@ public class Odontologo {
 
     @Column
     private String apellido;
+
+    @OneToMany(mappedBy = "odontologo",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Turno> turnos=new HashSet<>();
+
 
 
     //constructor
@@ -72,5 +81,13 @@ public class Odontologo {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public Set<Turno> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(Set<Turno> turnos) {
+        this.turnos = turnos;
     }
 }

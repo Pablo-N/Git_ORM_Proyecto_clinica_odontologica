@@ -2,9 +2,10 @@ package com.PabloNovoa.SistemaGestionTurnos.entity;
 
 
 import jakarta.persistence.*;
-
-
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "pacientes")
 public class Paciente {
@@ -31,6 +32,9 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id",referencedColumnName = "id")
     private Domicilio domicilio;
+
+    @OneToMany(mappedBy = "paciente",fetch = FetchType.LAZY)
+    private Set<Turno> turnos = new HashSet<>();
 
     // Constructor
 
@@ -113,5 +117,13 @@ public class Paciente {
 
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public Set<Turno> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(Set<Turno> turnos) {
+        this.turnos = turnos;
     }
 }
