@@ -18,6 +18,8 @@ public class PacienteService {
         this.pacienteRepository = pacienteRepository;
     }
 
+
+
     // get
 
     public List<Paciente> buscarPacientes(){

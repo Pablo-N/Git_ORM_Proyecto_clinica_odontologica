@@ -15,13 +15,14 @@ import java.util.Optional;
 @Service
 public class TurnoService {
 
-    TurnoRepository turnoRepository;
+   private TurnoRepository turnoRepository;
+
+
 
     @Autowired
     public TurnoService(TurnoRepository turnoRepository) {
         this.turnoRepository = turnoRepository;
     }
-
 
     private TurnoDTO turnoATurnoDTO(Turno turno){
         //convertir el turno a un turnoDTO
